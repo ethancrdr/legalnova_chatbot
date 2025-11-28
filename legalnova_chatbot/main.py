@@ -10,6 +10,11 @@ import requests
 from typing import Dict, Optional
 import logging
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 # ===================== CONFIG =====================
 # IMPORTANTE: Mover estas credenciales a variables de entorno en producción
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyDLbl7H75Ccn9YzGGljDFflEHRQ_GyWoO0")
@@ -505,4 +510,5 @@ También manejamos auditorías certificadas y servicios a la medida según tu in
 # ===================== EJECUCIÓN =====================
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
 
