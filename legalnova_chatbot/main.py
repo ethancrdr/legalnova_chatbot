@@ -8,6 +8,7 @@ import uvicorn
 import os
 import requests
 from typing import Dict, Optional
+import logging
 
 # ===================== CONFIG =====================
 # IMPORTANTE: Mover estas credenciales a variables de entorno en producción
@@ -20,6 +21,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 # Cargar knowledge base
 try:
+    logging.info("Cargando knowledge_base_limpia.json")
     with open('knowledge_base_limpia.json', 'r', encoding='utf-8') as f:
         knowledge = json.load(f)
 except FileNotFoundError:
@@ -220,7 +222,9 @@ app.add_middleware(
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
+    logging.basicConfig(level=logging.INFO)
     with open("test.html", "r", encoding="utf-8") as f:  # ✅ Así queda
+        logging.info("Accediendo a root - Cargando test.html")
         return f.read()
 
 @app.get("/webhook")
