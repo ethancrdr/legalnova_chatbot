@@ -17,10 +17,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 # ===================== CONFIG =====================
 # IMPORTANTE: Mover estas credenciales a variables de entorno en producción
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyDLbl7H75Ccn9YzGGljDFflEHRQ_GyWoO0")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyBhiAh2hHZTXqHF0JHMKyy7m15draaClwQ")
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN", "NOVERBOT_LEGALNOVA_2025")
-META_ACCESS_TOKEN = os.getenv("META_ACCESS_TOKEN", "EAAVJwuGv7D4BQLNYrB4ZAdjjdTyj04oPv44ODuZAxGQtCBZBiWsZCE1AGLfQCGkajd3Sl1wb08o3lnIvQMQ9a7wy37clTVdrAWcGZB5e5hsk6YCV2t8YUZC5sUicCoQco3fpqjGfdFRmQZAj1DqjZAFZCZCZAjsHU2muxAT87bQCueOuWtWCCRDF9w05BTnU4j10ewZBcS09NTLCpxd5ZA6uOBhlEnDOh9ZCdoPresydIULZCjHRFmZBmJLiYPsGQZBGNfv4QodvhWdKz1FdiKwpcNWgL4q1bbgVP")
+META_ACCESS_TOKEN = os.getenv("META_ACCESS_TOKEN", "EAAVJwuGv7D4BQNuKGm6sJrUay91jZB9dqess03dZB1CDkKvklEavmZAJkvmewQizr21cWGZBg9vngnZAit9zeYwtiZBZBD5zRJFZBXMgsnk196skeQmBIVRZAJrieuBZBVLdG6LEUam8rplpvlH9ammEITP2VL0ZBpwIOeDC7nS1Wa3Xlf2DRGj1Eajoer54OrdpGEYY5M0aqTu7jqP3T6xHMS60vKRGPqTVx5bq6TfaUOmqO3upZCvFbvqG0pm4twA2KwfaQ4g4jCrUToeHADQNzBQPvTw6")
 WHATSAPP_PHONE_ID = os.getenv("WHATSAPP_PHONE_ID", "921364574387453")
+
 
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -510,5 +511,6 @@ También manejamos auditorías certificadas y servicios a la medida según tu in
 # ===================== EJECUCIÓN =====================
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
 
 
