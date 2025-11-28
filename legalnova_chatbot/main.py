@@ -10,18 +10,20 @@ import requests
 from typing import Dict, Optional
 import logging
 
+
+# Configurar logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
 # ===================== CONFIG =====================
 # IMPORTANTE: Mover estas credenciales a variables de entorno en producción
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyBhiAh2hHZTXqHF0JHMKyy7m15draaClwQ")
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN", "NOVERBOT_LEGALNOVA_2025")
 META_ACCESS_TOKEN = os.getenv("META_ACCESS_TOKEN", "EAAVJwuGv7D4BQNuKGm6sJrUay91jZB9dqess03dZB1CDkKvklEavmZAJkvmewQizr21cWGZBg9vngnZAit9zeYwtiZBZBD5zRJFZBXMgsnk196skeQmBIVRZAJrieuBZBVLdG6LEUam8rplpvlH9ammEITP2VL0ZBpwIOeDC7nS1Wa3Xlf2DRGj1Eajoer54OrdpGEYY5M0aqTu7jqP3T6xHMS60vKRGPqTVx5bq6TfaUOmqO3upZCvFbvqG0pm4twA2KwfaQ4g4jCrUToeHADQNzBQPvTw6")
 WHATSAPP_PHONE_ID = os.getenv("WHATSAPP_PHONE_ID", "921364574387453")
-
 
 genai.configure(api_key=GEMINI_API_KEY)
 
@@ -230,23 +232,12 @@ app.add_middleware(
 async def root():
     try:
         with open("test.html", "r", encoding="utf-8") as f:
-            logger.info("✅ test.html cargado correctamente")
             return f.read()
     except FileNotFoundError:
-        logger.error("❌ test.html no encontrado")
-        return """
-        <!DOCTYPE html>
-        <html>
-        <head><title>Nover BOT</title></head>
-        <body>
-            <h1>🤖 Nover BOT - Online</h1>
-            <p>Status: ✅ Active</p>
-        </body>
-        </html>
-        """
-    except Exception as e:
-        logger.error(f"❌ Error: {e}")
-        return f"<h1>Error: {str(e)}</h1>"
+        return """<!DOCTYPE html>
+        <html><body style="font-family:Arial;padding:50px;text-align:center;">
+        <h1>🤖 Nover BOT - Online</h1><p style="color:green;">✅ Activo</p>
+        </body></html>"""
 
 @app.get("/webhook")
 async def verify_webhook(request: Request):
