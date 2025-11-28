@@ -222,10 +222,25 @@ app.add_middleware(
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    logging.basicConfig(level=logging.INFO)
-    with open("test.html", "r", encoding="utf-8") as f:  # ✅ Así queda
-        logging.info("Accediendo a root - Cargando test.html")
-        return f.read()
+    try:
+        with open("test.html", "r", encoding="utf-8") as f:
+            logger.info("✅ test.html cargado correctamente")
+            return f.read()
+    except FileNotFoundError:
+        logger.error("❌ test.html no encontrado")
+        return """
+        <!DOCTYPE html>
+        <html>
+        <head><title>Nover BOT</title></head>
+        <body>
+            <h1>🤖 Nover BOT - Online</h1>
+            <p>Status: ✅ Active</p>
+        </body>
+        </html>
+        """
+    except Exception as e:
+        logger.error(f"❌ Error: {e}")
+        return f"<h1>Error: {str(e)}</h1>"
 
 @app.get("/webhook")
 async def verify_webhook(request: Request):
@@ -490,3 +505,4 @@ También manejamos auditorías certificadas y servicios a la medida según tu in
 # ===================== EJECUCIÓN =====================
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
